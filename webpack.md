@@ -1,17 +1,15 @@
 #配置说明：
 
 命令行 npm run dev
-<script>
-  "scripts": {
-    "dev": "node build/dev-server.js",
-    "build": "node build/build.js",
-    "unit": "karma start test/unit/karma.conf.js --single-run",
-    "e2e": "node test/e2e/runner.js",
-    "test": "npm run unit && npm run e2e",
-    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
-  },
-<script>
 
+"scripts": {
+  "dev": "node build/dev-server.js",
+  "build": "node build/build.js",
+  "unit": "karma start test/unit/karma.conf.js --single-run",
+  "e2e": "node test/e2e/runner.js",
+  "test": "npm run unit && npm run e2e",
+  "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+},
 npm run XXX, 敲入不同的命令，执行不同的js文件
 根据package.json文件，运行scripts属性的dev，即运行build/dev-server.js;
 
@@ -30,6 +28,8 @@ bundle的入口点。
 如果传入个数组，所有模块都是启动时加载，模块导出到最后一个里面。
 entry: ["./entry1", "./entry2"]
 如果传入一个对象，就会创建多个输入包文件，对象键值就chunk的name，值可以是字符串或者是数组。
+
+```
 entry: {
     app: './src/main.js'
   },
@@ -39,8 +39,12 @@ entry: {
     page2: ["./entry1", "./entry2"]
 },
 
+```
+
 2.output
 output参数是个对象，用于定义构建后的文件的输出。其中包含path、filename和publicPath
+
+```
 output: {
     <!-- path：打包后的js文件存放地址。绝对路径 (required) -->
     path: config.build.assetsRoot,
@@ -60,6 +64,8 @@ output: {
   <head>
     <link href="/assets/spinner.gif"/>
   </head>
+
+```
 
 使用CDN 和 hash的例子.（有待研究）
 参考 https://zhuanlan.zhihu.com/p/21346555
@@ -92,6 +98,7 @@ Loader的特点：
     和插件（plugins）配合可获得更多功能
     可生成其他格式文件
 
+```
 modules: {
     loaders: [
         {
@@ -139,8 +146,11 @@ module: {
       }
 },
 
+```
 4、resolve
 webpack在构建包的时候会按目录的进行文件的查找，resolve属性中的extensions数组中用于配置程序可以自行补全哪些文件后缀,应用于解决模块的扩展数组, 配置后, 数组里的扩展名在require时可以省略：
+
+```
 resolve: {
     extensions: ['', '.js', '.vue', '.json'],
     <!-- webpack没有在resolve.root 或者resolve.modulesDirectories找到的模块的一个目录（或者目录绝对路径的数组）. -->
@@ -154,6 +164,9 @@ resolve: {
       'components': path.resolve(__dirname, '../src/components')
     }
   },
+
+```
+
 然后我们想要加载一个js文件时，只要require(‘common’)就可以加载common.js文件了。
 
 5、resolveLoader
@@ -161,24 +174,30 @@ resolve: {
 参考 http://stephenzhao.github.io/2016/06/13/webpack-doc-configuration/
 
 6、eslint
+
+```
 eslint: {
   // 以更友好的格式输出eslint错误信息
   formatter: require('eslint-friendly-formatter')
 },
+```
 
 7、vue
-  // vue-loader配置
-  vue: {
-    loaders: utils.cssLoaders({ sourceMap: useCssSourceMap }),
-    postcss: [
-      require('autoprefixer')({
-        browsers: ['last 2 versions']
-      })
-    ]
-  }
+
+```
+// vue-loader配置
+vue: {
+  loaders: utils.cssLoaders({ sourceMap: useCssSourceMap }),
+  postcss: [
+    require('autoprefixer')({
+      browsers: ['last 2 versions']
+    })
+  ]
+```
 
 ##webpack.dev.conf.js
 
+```
 var config = require('../config')
 var webpack = require('webpack')
 var merge = require('webpack-merge')
@@ -227,10 +246,12 @@ module.exports = merge(baseWebpackConfig, {
   ]
 })
 
+```
 
 
 #webpack.prod.conf.js
 
+```
 var path = require('path')
 var config = require('../config')
 var utils = require('./utils')
@@ -342,3 +363,5 @@ if (config.build.productionGzip) {
 }
 
 module.exports = webpackConfig
+
+```
