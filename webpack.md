@@ -1,15 +1,17 @@
 #配置说明：
 
 命令行 npm run dev
+<script>
+  "scripts": {
+    "dev": "node build/dev-server.js",
+    "build": "node build/build.js",
+    "unit": "karma start test/unit/karma.conf.js --single-run",
+    "e2e": "node test/e2e/runner.js",
+    "test": "npm run unit && npm run e2e",
+    "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
+  },
+<script>
 
-"scripts": {
-  "dev": "node build/dev-server.js",
-  "build": "node build/build.js",
-  "unit": "karma start test/unit/karma.conf.js --single-run",
-  "e2e": "node test/e2e/runner.js",
-  "test": "npm run unit && npm run e2e",
-  "lint": "eslint --ext .js,.vue src test/unit/specs test/e2e/specs"
-},
 npm run XXX, 敲入不同的命令，执行不同的js文件
 根据package.json文件，运行scripts属性的dev，即运行build/dev-server.js;
 
